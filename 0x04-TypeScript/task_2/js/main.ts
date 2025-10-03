@@ -28,3 +28,31 @@ const director1: Directors = {
 // Log the director object to the console to show its structure.
 // The output should match the example provided in the task description.
 console.log(director1);
+
+// Add minimal Director and Teacher classes with required task methods
+class Director {
+  workFromHome(): string { return "Working from home"; }
+  getCoffeeBreak(): string { return "Getting a coffee break"; }
+  workDirectorTasks(): string { return "Getting to director tasks"; }
+}
+
+class Teacher {
+  workFromHome(): string { return "Cannot work from home"; }
+  getCoffeeBreak(): string { return "Cannot have a break"; }
+  workTeacherTasks(): string { return "Getting to work"; }
+}
+
+type Employee = Director | Teacher;
+
+// Type predicate to identify a Director
+export function isDirector(employee: Employee): employee is Director {
+  return employee instanceof Director;
+}
+
+// Execute appropriate work based on employee type
+export function executeWork(employee: Employee): string {
+  if (isDirector(employee)) {
+    return employee.workDirectorTasks();
+  }
+  return employee.workTeacherTasks();
+}
